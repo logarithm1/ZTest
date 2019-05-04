@@ -22,17 +22,20 @@ public class SolutionInteractive {
 
         String response = interact("question", "-1", true);
 
-        String result = "";
+        String result = response + " - processed";
 
-        interact(result, "-1", true);
+        interact(result, "-1", true, "Final Answer: ");
     }
 
-    private String interact(String question, String errorResponse, boolean debug) {
+    private String interact(String question, String errorResponse, boolean debug, String ... logMsg) {
         System.out.println(question);
         String answer = ns();
         if(answer.equals(errorResponse)) throw new RuntimeException("got error");
-        if(debug)
-            System.err.println("question: "+ question + " answer: " + answer);
+        if(debug) {
+            String qMsg = logMsg.length>0?logMsg[0]:"Question: ";
+            System.err.println(qMsg + question + " Answer: " + answer);
+        }
+
         return answer;
     }
 
